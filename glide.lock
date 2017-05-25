@@ -1,0 +1,6 @@
+hash: c41a1561d87465f96847056a9dfcaee0a180db058f151c07c5d478fdf723f667
+updated: 2017-05-26T00:48:30.106457445+02:00
+imports:
+- name: github.com/joho/godotenv
+  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
+testImports: []

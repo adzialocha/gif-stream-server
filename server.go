@@ -1,12 +1,16 @@
 package main
 
 import (
+  "github.com/joho/godotenv"
+
   "log"
   "os"
   "net/http"
 )
 
 func main() {
+  godotenv.Load()
+
   port := os.Getenv("PORT")
 
   if port == "" {
