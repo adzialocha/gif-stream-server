@@ -1,16 +1,10 @@
 package main
 
 import (
-  "github.com/subosito/gotenv"
-
   "log"
   "os"
   "net/http"
 )
-
-func init() {
-  gotenv.Load()
-}
 
 func main() {
   port := os.Getenv("PORT")
