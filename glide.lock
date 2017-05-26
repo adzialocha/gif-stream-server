@@ -1,6 +1,8 @@
-hash: c41a1561d87465f96847056a9dfcaee0a180db058f151c07c5d478fdf723f667
-updated: 2017-05-26T00:48:30.106457445+02:00
+hash: a76c0054e832e4900ad240e4d763f4f54a71600b27e803d05ad436be9ccac92f
+updated: 2017-05-26T01:09:57.527387735+02:00
 imports:
+- name: github.com/aws/aws-sdk-go
+  version: e0cdae7a65ba3a5e66a0af747a7b3967ddac099c
 - name: github.com/joho/godotenv
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
 testImports: []

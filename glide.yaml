@@ -2,3 +2,5 @@ package: gif-stream-server
 import:
 - package: github.com/joho/godotenv
   version: ^1.1.0
+- package: github.com/aws/aws-sdk-go
+  version: ^1.8.30
