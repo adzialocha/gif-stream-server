@@ -27,8 +27,8 @@ func main() {
 		os.Getenv("AWS_ACCESS_KEY_ID"),
 		os.Getenv("AWS_SECRET_ACCESS_KEY"),
 		os.Getenv("AWS_SESSION_TOKEN"),
-		os.Getenv("AWS_BUCKET_NAME"),
 		os.Getenv("AWS_REGION"),
+		os.Getenv("AWS_BUCKET_NAME"),
 	)
 
 	// Start HTTP static file server.

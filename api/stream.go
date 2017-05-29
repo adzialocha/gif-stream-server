@@ -11,6 +11,7 @@ import (
 func (api *API) GetImageStream(w http.ResponseWriter, r *http.Request) {
 	req, _ := api.s3Client.ListObjects(&s3.ListObjectsInput{
 		Bucket: aws.String(api.s3BucketName),
+		Prefix: aws.String("stream/"),
 	})
 	json, _ := json.Marshal(req)
 
