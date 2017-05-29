@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
@@ -21,10 +20,10 @@ func (api *API) GetSignedUploadURL(w http.ResponseWriter, r *http.Request) {
 	// Generate name of file with unique id and timestamp.
 	id := r.URL.Query().Get("id")
 	if (id == "" || len(id) != IdParamNeededLength) {
-		http.Error(
-			w,
-			"id parameter is missing or too short.",
+		api.WriteJSONErrorResponse(
+			"Parameter 'id' is missing or too short.",
 			http.StatusUnprocessableEntity,
+			w,
 		)
 		return
 	}
@@ -44,8 +43,5 @@ func (api *API) GetSignedUploadURL(w http.ResponseWriter, r *http.Request) {
 		SignedUrl: url,
 		ObjectKey: objectKey,
 	}
-	json, _ := json.Marshal(response)
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(json)
+	api.WriteJSONResponse(response, w)
 }

@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,8 +12,5 @@ func (api *API) GetImageStream(w http.ResponseWriter, r *http.Request) {
 		Bucket: aws.String(api.s3BucketName),
 		Prefix: aws.String("stream/"),
 	})
-	json, _ := json.Marshal(req)
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(json)
+	api.WriteJSONResponse(req, w)
 }

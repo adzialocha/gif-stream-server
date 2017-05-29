@@ -1,6 +1,9 @@
 package api
 
 import (
+	"encoding/json"
+	"net/http"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -24,4 +27,27 @@ func New(accessKeyId string, secretAccessKey string, sessionToken string, region
 		s3BucketName: bucketName,
 		s3Region: region,
 	}
+}
+
+func (api *API) WriteJSONResponse(response interface{}, w http.ResponseWriter) {
+	json, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(json)
+}
+
+func (api *API) WriteJSONErrorResponse(message string, statusCode int, w http.ResponseWriter) {
+	type ErrorResponse struct {
+		Message string `json:"message"`
+		StatusCode int `json:"statusCode"`
+	}
+
+	response := ErrorResponse{
+		Message: message,
+		StatusCode: statusCode,
+	}
+
+	json, _ := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	w.Write(json)
 }
