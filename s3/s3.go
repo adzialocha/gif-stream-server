@@ -25,3 +25,7 @@ func New(accessKeyId string, secretAccessKey string, sessionToken string, region
 		Region: region,
 	}
 }
+
+func (s3 *S3) KeyToUrl(key string) string {
+	return "https://s3." + s3.Region + ".amazonaws.com/" + s3.BucketName + "/" + key
+}
