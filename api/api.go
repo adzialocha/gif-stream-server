@@ -4,28 +4,16 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/adzialocha/gif-stream-server/s3"
 )
 
 type API struct {
-	s3Client *s3.S3
-	s3BucketName string
-	s3Region string
+	s3 *s3.S3
 }
 
-func New(accessKeyId string, secretAccessKey string, sessionToken string, region string, bucketName string) *API {
-	// Prepare S3 configuration.
-	creds := credentials.NewStaticCredentials(accessKeyId, secretAccessKey, sessionToken)
-	cfg := aws.NewConfig().WithRegion(region).WithCredentials(creds)
-
-	// Return new API instance.
+func New(s3Instance *s3.S3) *API {
 	return &API{
-		s3Client: s3.New(session.New(), cfg),
-		s3BucketName: bucketName,
-		s3Region: region,
+		s3: s3Instance,
 	}
 }
 
