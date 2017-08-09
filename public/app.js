@@ -15,6 +15,18 @@ function request(url, data, method = 'GET') {
   })
 }
 
-window.setInterval(() => {
-  request('http://localhost:3000/api/stream')
-}, 10000)
+const container = document.getElementById('container')
+
+function update() {
+  request('/api/stream')
+    .then(response => {
+      response.data.forEach(animation => {
+        const img = document.createElement('img')
+        img.src = animation.url
+
+        container.appendChild(img)
+      })
+    })
+}
+
+update()

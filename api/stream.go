@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 )
 
-const PageSize = 50
+const PageSize = 150
 
 func (api *API) GetImageStream(w http.ResponseWriter, r *http.Request) {
 	type ResponseEntry struct {
