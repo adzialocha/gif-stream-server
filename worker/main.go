@@ -165,16 +165,20 @@ func main() {
 					objectKey.Body = body
 					nextAnimation = append(nextAnimation, objectKey)
 				}
-			} else {
+			}
+
+			if (len(nextAnimation) == AnimationFrameCount) {
 				makeGifAndUpload(s3Client, nextAnimation)
 				nextAnimation = nextAnimation[:0]
 			}
 		}
 
-		// Not enough frames, but maybe outdated?
-		lastFrame := nextAnimation[len(nextAnimation) - 1]
-		if (lastFrame.DateTime < timeTresholdStr) {
-			makeGifAndUpload(s3Client, nextAnimation)
+		if (len(nextAnimation) > 0) {
+			// Not enough frames, but maybe outdated?
+			lastFrame := nextAnimation[len(nextAnimation) - 1]
+			if (lastFrame.DateTime < timeTresholdStr) {
+				makeGifAndUpload(s3Client, nextAnimation)
+			}
 		}
 	}
 }

@@ -15,7 +15,7 @@ function request(url, data, method = 'GET') {
   })
 }
 
-const container = document.getElementById('container')
+const streamElem = document.getElementById('stream')
 
 function update() {
   request('/api/stream')
@@ -24,7 +24,7 @@ function update() {
         const img = document.createElement('img')
         img.src = animation.url
 
-        container.appendChild(img)
+        streamElem.appendChild(img)
       })
     })
 }
