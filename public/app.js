@@ -16,10 +16,22 @@ function request(url, data, method = 'GET') {
 }
 
 const streamElem = document.getElementById('stream')
+const loadButtonElem = document.getElementById('load-button')
+
+let nextMarker
 
 function update() {
-  request('/api/stream')
+  const path = nextMarker ? `/api/stream?marker=${nextMarker}` : '/api/stream'
+
+  loadButtonElem.disabled = true
+
+  request(path)
     .then(response => {
+      if (response.nextMarker) {
+        loadButtonElem.disabled = false
+        nextMarker = response.nextMarker
+      }
+
       response.data.forEach(animation => {
         const img = document.createElement('img')
         img.src = animation.url
@@ -29,4 +41,4 @@ function update() {
     })
 }
 
-update()
+loadButtonElem.addEventListener('click', update)
