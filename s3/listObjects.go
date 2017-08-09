@@ -10,6 +10,7 @@ func (s3 *S3) ListObjects(prefix string, pageSize int64, marker string) (*SDK.Li
 	options := &SDK.ListObjectsInput{
 		Bucket: aws.String(s3.BucketName),
 		Prefix: aws.String(prefix),
+		Delimiter: aws.String("/"),
 		MaxKeys: aws.Int64(pageSize),
 	}
 
@@ -21,4 +22,28 @@ func (s3 *S3) ListObjects(prefix string, pageSize int64, marker string) (*SDK.Li
 	// Do request to S3 instance.
 	out, _ := s3.Client.ListObjects(options)
 	return out
+}
+
+// Get all objects.
+func (s3 *S3) ListAllObjects(prefix string) ([]string) {
+	options := &SDK.ListObjectsInput{
+		Bucket: aws.String(s3.BucketName),
+		Prefix: aws.String(prefix),
+		Delimiter: aws.String("/"),
+	}
+
+	objects := []string{}
+
+	// Do request to S3 instance.
+	s3.Client.ListObjectsPages(
+		options,
+		func(p *SDK.ListObjectsOutput, last bool) (shouldContinue bool) {
+			for _, obj := range p.Contents {
+				objects = append(objects, aws.StringValue(obj.Key))
+			}
+			return true
+		},
+	)
+
+	return objects
 }

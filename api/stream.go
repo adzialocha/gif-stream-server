@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 )
@@ -25,7 +26,7 @@ func (api *API) GetImageStream(w http.ResponseWriter, r *http.Request) {
 	marker := r.URL.Query().Get("marker")
 
 	// Do request to S3 instance.
-	req := api.s3.ListObjects("stream/*", PageSize, marker)
+	req := api.s3.ListObjects("stream/", PageSize, marker)
 
 	// Prepare response payload.
 	response := Response{
@@ -35,9 +36,12 @@ func (api *API) GetImageStream(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, obj := range req.Contents {
-		response.Data = append(response.Data, ResponseEntry{
-			Url: api.s3.KeyToUrl(aws.StringValue(obj.Key)),
-		})
+		key := aws.StringValue(obj.Key)
+		if (strings.Contains(key, ".gif")) {
+			response.Data = append(response.Data, ResponseEntry{
+				Url: api.s3.KeyToUrl(key),
+			})
+		}
         }
 
         // Return JSON with signed URL.

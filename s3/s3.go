@@ -13,9 +13,9 @@ type S3 struct {
 	Region string
 }
 
-func New(accessKeyId string, secretAccessKey string, sessionToken string, region string, bucketName string) *S3 {
+func New(accessKeyId string, secretAccessKey string, region string, bucketName string) *S3 {
 	// Prepare S3 configuration.
-	creds := credentials.NewStaticCredentials(accessKeyId, secretAccessKey, sessionToken)
+	creds := credentials.NewStaticCredentials(accessKeyId, secretAccessKey, "")
 	cfg := aws.NewConfig().WithRegion(region).WithCredentials(creds)
 
 	// Return new API instance.

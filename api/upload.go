@@ -26,7 +26,7 @@ func (api *API) GetSignedUploadURL(w http.ResponseWriter, r *http.Request) {
 	}
 	now := time.Now().UTC().Format("2006-01-02T15-04-05Z")
 	timestamp := strings.Replace(now, "-", "", -1)
-	objectKey := "frames/" + id + "_" + timestamp + ".jpg"
+	objectKey := "frames/" + id + "_" + timestamp
 
 	// Get a signed PUT request to upload files to S3.
 	url := api.s3.SignedPutObjectRequestURL(objectKey, 5 * time.Minute)

@@ -27,7 +27,6 @@ func main() {
 	s3 := s3.New(
 		os.Getenv("AWS_ACCESS_KEY_ID"),
 		os.Getenv("AWS_SECRET_ACCESS_KEY"),
-		os.Getenv("AWS_SESSION_TOKEN"),
 		os.Getenv("AWS_REGION"),
 		os.Getenv("AWS_BUCKET_NAME"),
 	)

@@ -20,6 +20,8 @@ func New(s3Instance *s3.S3) *API {
 func (api *API) WriteJSONResponse(response interface{}, w http.ResponseWriter) {
 	json, _ := json.Marshal(response)
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(200)
 	w.Write(json)
 }
 
@@ -36,6 +38,7 @@ func (api *API) WriteJSONErrorResponse(message string, statusCode int, w http.Re
 
 	json, _ := json.Marshal(response)
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(statusCode)
 	w.Write(json)
 }
