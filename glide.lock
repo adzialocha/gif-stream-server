@@ -1,8 +1,38 @@
-hash: a76c0054e832e4900ad240e4d763f4f54a71600b27e803d05ad436be9ccac92f
-updated: 2017-05-26T01:09:57.527387735+02:00
+hash: 04a2643f25957329ad79cffd578c90b332621307d048bbd012818a4fdf74c3a9
+updated: 2017-08-15T09:18:16.563519899+02:00
 imports:
 - name: github.com/aws/aws-sdk-go
-  version: e0cdae7a65ba3a5e66a0af747a7b3967ddac099c
+  version: 77c204059e353965728c1898f9755d4970294da0
+  subpackages:
+  - aws
+  - aws/awserr
+  - aws/awsutil
+  - aws/client
+  - aws/client/metadata
+  - aws/corehandlers
+  - aws/credentials
+  - aws/credentials/ec2rolecreds
+  - aws/credentials/endpointcreds
+  - aws/credentials/stscreds
+  - aws/defaults
+  - aws/ec2metadata
+  - aws/endpoints
+  - aws/request
+  - aws/session
+  - aws/signer/v4
+  - internal/shareddefaults
+  - private/protocol
+  - private/protocol/query
+  - private/protocol/query/queryutil
+  - private/protocol/rest
+  - private/protocol/restxml
+  - private/protocol/xml/xmlutil
+  - service/s3
+  - service/sts
+- name: github.com/go-ini/ini
+  version: c787282c39ac1fc618827141a1f762240def08a3
+- name: github.com/jmespath/go-jmespath
+  version: bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d
 - name: github.com/joho/godotenv
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
 testImports: []
