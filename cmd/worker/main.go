@@ -77,7 +77,7 @@ func makeAnimation(frames []Frame) ([]byte) {
 func generateReverseTimestamp() (string) {
 	// Create a reverse timestamp
 	var offset, now, result big.Int
-	offset.SetInt64(999999999)
+	offset.SetInt64(9999999999)
 	now.SetInt64(time.Now().Unix())
 	result.Sub(&offset, &now)
 	return result.String()
