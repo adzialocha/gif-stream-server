@@ -9,6 +9,7 @@ import (
 	"image/draw"
 	"image/gif"
 	"image/jpeg"
+	"math/big"
 	"os"
 	"sort"
 	"strings"
@@ -73,10 +74,22 @@ func makeAnimation(frames []Frame) ([]byte) {
 	return gifBuffer.Bytes()
 }
 
+func generateReverseTimestamp() (string) {
+	// Create a reverse timestamp
+	var offset, now, result big.Int
+	offset.SetInt64(999999999)
+	now.SetInt64(time.Now().Unix())
+	result.Sub(&offset, &now)
+	return result.String()
+}
+
 func makeGifAndUpload(s3Client *s3.S3, frames []Frame) {
+	// Create a reverse timestamp
+	timestamp := generateReverseTimestamp()
+
 	// Make gif
 	gifBytes := makeAnimation(frames)
-	gifFileName := "stream/" + frames[0].SessionId + "-" + frames[0].DateTime + ".gif"
+	gifFileName := "stream/" + frames[0].SessionId + "-" + timestamp + ".gif"
 
 	// Upload to S3
 	s3Client.PutObject(
