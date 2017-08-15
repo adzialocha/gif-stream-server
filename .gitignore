@@ -1,2 +1,7 @@
+# development
 vendor
 .env
+
+# build
+gif-stream-server
+worker
