@@ -11,10 +11,19 @@ A server which awaits webcam image uploads from [gif-stream](https://github.com/
 
 1. Make sure to set the `GO_INSTALL_PACKAGE_SPEC` variable to `./cmd/...` to make sure Heroku builds both separate binaries.
 
-  ```
-  heroku config:set GO_INSTALL_PACKAGE_SPEC=./cmd/...
-  ```
+    ```
+    heroku config:set GO_INSTALL_PACKAGE_SPEC=./cmd/...
+    ```
 
-2. Install the `Heroku Scheduler` Add On and put up a job which executes `worker` every 10 minutes.
+2. Configure the following environmental variables:
 
-3. Activate both Dynos `web` and `worker` (put them to "ON" under "Configure Dynos").
+    ```
+    AWS_REGION=eu-central-1
+    AWS_ACCESS_KEY_ID=
+    AWS_SECRET_ACCESS_KEY=
+    AWS_BUCKET_NAME=
+    ```
+
+3. Install the `Heroku Scheduler` Add On and put up a job which executes `worker` every 10 minutes.
+
+4. Activate both Dynos `web` and `worker` (put them to "ON" under "Configure Dynos").
