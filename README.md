@@ -1,7 +1,20 @@
 # gif-stream-server
 
-## Heroku setup
+A server which awaits webcam image uploads from [gif-stream](https://github.com/adzialocha/gif-stream) clients to generate .gifs and upload them to an AWS S3 bucket. Can be used together with [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000).
 
-```
-heroku config:set GO_INSTALL_PACKAGE_SPEC=./cmd/...
-```
+## Requirements
+
+* Go environment
+* AWS S3 instance
+
+## Setup via Heroku
+
+1. Make sure to set the `GO_INSTALL_PACKAGE_SPEC` variable to `./cmd/...` to make sure Heroku builds both separate binaries.
+
+  ```
+  heroku config:set GO_INSTALL_PACKAGE_SPEC=./cmd/...
+  ```
+
+2. Install the `Heroku Scheduler` Add On and put up a job which executes `worker` every 10 minutes.
+
+3. Activate both Dynos `web` and `worker` (put them to "ON" under "Configure Dynos").
