@@ -27,3 +27,7 @@ A server which awaits webcam image uploads from [gif-stream](https://github.com/
 3. Install the `Heroku Scheduler` Add On and put up a job which executes `worker` every 10 minutes.
 
 4. Activate both Dynos `web` and `worker` (put them to "ON" under "Configure Dynos").
+
+## License
+
+MIT
